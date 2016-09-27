@@ -34,7 +34,7 @@ public class Main {
 			kb = new Scanner(System.in);// default from Stdin
 			ps = System.out;			// default to Stdout
 		}
-		makeDictionary();
+		getWordLadderBFS("yes" , " no");
 		initialize();
 		
 		// TODO methods to read in words, output ladder
@@ -71,6 +71,9 @@ public class Main {
 		
 		// TODO some code
 		Set<String> dict = makeDictionary();
+		if(dict.contains("ABAYA")){
+			System.out.println("Yes");
+		}
 		// TODO more code
 		
 		return null; // replace this line later with real return
