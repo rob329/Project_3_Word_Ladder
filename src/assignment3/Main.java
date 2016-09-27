@@ -4,7 +4,7 @@
  * <Robert Bolt>
  * <rob329>
  * <Student1 5-digit Unique No.>
- * <Student2 Name>
+ * <Akhil Mujje>
  * <Student2 EID>
  * <Student2 5-digit Unique No.>
  * Slip days used: <0>
