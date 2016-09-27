@@ -34,6 +34,7 @@ public class Main {
 			kb = new Scanner(System.in);// default from Stdin
 			ps = System.out;			// default to Stdout
 		}
+		makeDictionary();
 		initialize();
 		
 		// TODO methods to read in words, output ladder
