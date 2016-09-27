@@ -5,7 +5,7 @@
  * <rob329>
  * <Student1 5-digit Unique No.>
  * <Akhil Mujje>
- * <Student2 EID>
+ * <dam4335>
  * <Student2 5-digit Unique No.>
  * Slip days used: <0>
  * Git URL: 
