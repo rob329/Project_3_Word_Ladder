@@ -39,7 +39,7 @@ public class Main {
 			ps = System.out;			// default to Stdout
 		}
 		initialize();
-		getWordLadderBFS("start","end");
+		getWordLadderBFS("START","END");
 		// TODO methods to read in words, output ladder
 	}
 	
@@ -73,18 +73,22 @@ public class Main {
     public static ArrayList<String> getWordLadderBFS(String start, String end) { 	
     	Set<String> dict = makeDictionary();
     	Queue<Node> queue = new LinkedList<Node>();
-    	Node startNode = new Node(start);
+    	Node startNode = new Node(start, null);
     	queue.add(startNode);
-    	for(int i=0 ; i < start.length() ;i++){
-    		for(int j =0; j < alphabet.length ; j++){
-    		String Add = start.substring(0,i) + alphabet[j] + start.substring(i+1, start.length());
-    		System.out.println(Add);
-    		if(dict.contains(Add)){	
+    	//while(!queue.isEmpty()){
+    		for(int i=0 ; i < start.length() ;i++){
+    			for(int j =0; j < alphabet.length ; j++){
+    				String Add = start.substring(0,i) + alphabet[j] + start.substring(i+1, start.length());
+    				Node newNode = new Node(Add, startNode);
+    				if(dict.contains(Add) && !(queue.contains(newNode)) ){
+    					System.out.println(Add);
+      					queue.add(newNode);
+    			}
+    			
     		}
-    	}
     	
     	}
-    	
+    	//}
 		// TODO some code
 		
 		if(dict.contains("ABAYA")){
