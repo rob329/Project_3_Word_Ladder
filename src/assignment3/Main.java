@@ -42,7 +42,7 @@ public class Main {
 
 		// TODO methods to read in words, output ladder
 
-		getWordLadderBFS("stone", "money");
+		printLadder(getWordLadderBFS("jazzy", "leady"));
 	}
 
 	public static void initialize() {
@@ -83,7 +83,7 @@ public class Main {
 		Set<String> dict = makeDictionary();
 
 		// Node<String> startNode = new Node<String>(start);
-		ArrayList<String> rp = new ArrayList<String>();
+		ArrayList<String> ladder = new ArrayList<String>();
 		ArrayList<Node> queue = new ArrayList<Node>();
 
 		String check = "";
@@ -103,52 +103,62 @@ public class Main {
 					dict.remove(check);
 					Node addition = new Node(check, parent);
 					queue.add(addition);
-					//System.out.println(check);
-					
+					// System.out.println(check);
+
 				}
 			}
-		
+
 		while (!finish) {
 
-			
-			for(int k = 0;k<queue.size();k++){
+			for (int k = 0; k < queue.size(); k++) {
+
 				for (int i = 0; i < word_length; i++)
 					for (int j = 0; j < alphabet.length; j++) {
 						Node nd = queue.get(k);
-						check = ((String)nd.getWord()).substring(0, i) + alphabet[j].charAt(0) + 
-								((String)nd.getWord()).substring(i + 1);
-						if (check.equals(end))
+						check = ((String) nd.getWord()).substring(0, i) + alphabet[j].charAt(0)
+								+ ((String) nd.getWord()).substring(i + 1);
+						if (check.equals(end)) {
 							finish = true;
-						
-						if (dict.contains(check) && (!(check.equals((String)nd.getWord())))) {
+							k = queue.size() + 1;
+							i = word_length + 1;
+							j = alphabet.length + 1;
+							// System.out.println(check);
+
+						}
+
+						if (dict.contains(check) && (!(check.equals((String) nd.getWord())))) {
 							dict.remove(check);
 							Node addition = new Node(check, nd);
 							queue.add(addition);
-							System.out.println(check);
-							
+							// System.out.println(check);
+
 						}
 					}
-				
+
 			}
-			
+			if (queue.size() == 0) {
+				System.out.println("srry, ladder could not be found");
+				System.out.println(queue.size());
+				return ladder;
+			}
+			if (!(queue.get(queue.size() - 1).getWord().equals(end))) {
+				System.out.println("srry, ladder could not be found");
+				System.out.println(queue.size());
+				return ladder;
+			}
 
-			
-
-			/*
-			 * while(q > 0){
-			 * 
-			 * head = startNode.getChildren().get(counter).getWord(); q--;
-			 * counter++; h = h.getChildren().get(counter); break;
-			 * 
-			 * }
-			 */
-
-			// Node<String> childNode2 = new Node<String>("Child 2");
-			// childNode2.setParent(startNode);
+			Node end_node = queue.get(queue.size() - 1).getParent();
+			ladder.add(end);
+			while (!(start.equals(end_node.getWord()))) {
+				ladder.add((String) end_node.getWord());
+				// System.out.println(end_node.getWord());
+				end_node = end_node.getParent();
+			}
+			ladder.add(start);
 
 		}
 
-		return rp;
+		return ladder;
 
 		// TODO more code
 
@@ -172,7 +182,9 @@ public class Main {
 	}
 
 	public static void printLadder(ArrayList<String> ladder) {
-
+		for (int i = ladder.size() - 1; i >= 0; i--) {
+			System.out.println(ladder.get(i));
+		}
 	}
 	// TODO
 	// Other private static methods here

@@ -22,6 +22,9 @@ public class Node<String> {
 	//	return children;
 	//}
 	
+	public Node<String> getParent(){
+		return this.parent;
+	}
 	public void setParent(Node<String> parent){		
 		this.parent = parent;
 	}
