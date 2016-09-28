@@ -16,9 +16,13 @@
 package assignment3;
 import java.util.*;
 import java.io.*;
+import java.util.ArrayList;  
+import java.util.LinkedList;  
+import java.util.Queue; 
 
 public class Main {
-	
+	public static final String[] alphabet = {"A","B","C","D","E","F", "G", "H", "I", "J", "K",
+		"L","M","N","O","P", "Q", "R", "S", "T", }; 
 	// static variables and constants only here.
 	
 	public static void main(String[] args) throws Exception {
@@ -34,7 +38,6 @@ public class Main {
 			kb = new Scanner(System.in);// default from Stdin
 			ps = System.out;			// default to Stdout
 		}
-		getWordLadderBFS("yes" , " no");
 		initialize();
 		
 		// TODO methods to read in words, output ladder
@@ -67,8 +70,14 @@ public class Main {
 		return null; // replace this line later with real return
 	}
 	
-    public static ArrayList<String> getWordLadderBFS(String start, String end) {
-		
+    public static ArrayList<String> getWordLadderBFS(String start, String end) { 	
+    	Queue<Node> queue = new LinkedList<Node>();
+    	Node startNode = new Node(start);
+    	queue.add(startNode);
+    	for(i=0 ; i <)
+    	
+    	
+    	
 		// TODO some code
 		Set<String> dict = makeDictionary();
 		if(dict.contains("ABAYA")){
