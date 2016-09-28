@@ -22,7 +22,7 @@ import java.util.Queue;
 
 public class Main {
 	public static final String[] alphabet = {"A","B","C","D","E","F", "G", "H", "I", "J", "K",
-		"L","M","N","O","P", "Q", "R", "S", "T", }; 
+		"L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z" }; 
 	// static variables and constants only here.
 	
 	public static void main(String[] args) throws Exception {
@@ -39,7 +39,7 @@ public class Main {
 			ps = System.out;			// default to Stdout
 		}
 		initialize();
-		
+		getWordLadderBFS("start","end");
 		// TODO methods to read in words, output ladder
 	}
 	
@@ -71,15 +71,22 @@ public class Main {
 	}
 	
     public static ArrayList<String> getWordLadderBFS(String start, String end) { 	
+    	Set<String> dict = makeDictionary();
     	Queue<Node> queue = new LinkedList<Node>();
     	Node startNode = new Node(start);
     	queue.add(startNode);
-    	for(i=0 ; i <)
+    	for(int i=0 ; i < start.length() ;i++){
+    		for(int j =0; j < alphabet.length ; j++){
+    		String Add = start.substring(0,i) + alphabet[j] + start.substring(i+1, start.length());
+    		System.out.println(Add);
+    		if(dict.contains(Add)){	
+    		}
+    	}
     	
-    	
+    	}
     	
 		// TODO some code
-		Set<String> dict = makeDictionary();
+		
 		if(dict.contains("ABAYA")){
 			System.out.println("Yes");
 		}
@@ -87,7 +94,7 @@ public class Main {
 		
 		return null; // replace this line later with real return
 	}
-    
+   
 	public static Set<String>  makeDictionary () {
 		Set<String> words = new HashSet<String>();
 		Scanner infile = null;
