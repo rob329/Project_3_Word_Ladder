@@ -42,7 +42,7 @@ public class Main {
 
 		// TODO methods to read in words, output ladder
 
-		getWordLadderBFS("stone", "sad");
+		getWordLadderBFS("stone", "money");
 	}
 
 	public static void initialize() {
@@ -75,38 +75,84 @@ public class Main {
 	}
 
 	public static ArrayList<String> getWordLadderBFS(String start, String end) {
-		start = start.toUpperCase();
+
 		// TODO some code
+		start = start.toUpperCase();
+		end = end.toUpperCase();
+		Node parent = new Node(start, null);
 		Set<String> dict = makeDictionary();
 
-		Node<String> startNode = new Node<String>(start);
-		
-		
+		// Node<String> startNode = new Node<String>(start);
+		ArrayList<String> rp = new ArrayList<String>();
+		ArrayList<Node> queue = new ArrayList<Node>();
+
 		String check = "";
+		String head = start;
+
+		boolean finish = false;
+		int q = 0;
+		int counter = 0;
+
 		for (int i = 0; i < word_length; i++)
 			for (int j = 0; j < alphabet.length; j++) {
-	//			if (start.charAt(i) != alphabet[j].charAt(0)){
-					check = start.substring(0, i) + alphabet[j].charAt(0)+ start.substring(i+1);
-					if(dict.contains(check)){
-					 startNode.addChild(check, startNode);					 
+
+				check = head.substring(0, i) + alphabet[j].charAt(0) + head.substring(i + 1);
+				if (check.equals(end))
+					finish = true;
+				if (dict.contains(check) && (!(check.equals(start)))) {
+					dict.remove(check);
+					Node addition = new Node(check, parent);
+					queue.add(addition);
+					//System.out.println(check);
+					
+				}
+			}
+		
+		while (!finish) {
+
+			
+			for(int k = 0;k<queue.size();k++){
+				for (int i = 0; i < word_length; i++)
+					for (int j = 0; j < alphabet.length; j++) {
+						Node nd = queue.get(k);
+						check = ((String)nd.getWord()).substring(0, i) + alphabet[j].charAt(0) + 
+								((String)nd.getWord()).substring(i + 1);
+						if (check.equals(end))
+							finish = true;
+						
+						if (dict.contains(check) && (!(check.equals((String)nd.getWord())))) {
+							dict.remove(check);
+							Node addition = new Node(check, nd);
+							queue.add(addition);
+							System.out.println(check);
+							
+						}
 					}
 				
-				
-
 			}
+			
 
-		
-		Node<String> childNode2 = new Node<String>("Child 2");
-		childNode2.setParent(startNode);
+			
 
-		if (dict.contains("AGONY")) {
-			System.out.println("agony");
+			/*
+			 * while(q > 0){
+			 * 
+			 * head = startNode.getChildren().get(counter).getWord(); q--;
+			 * counter++; h = h.getChildren().get(counter); break;
+			 * 
+			 * }
+			 */
+
+			// Node<String> childNode2 = new Node<String>("Child 2");
+			// childNode2.setParent(startNode);
 
 		}
 
+		return rp;
+
 		// TODO more code
 
-		return null; // replace this line later with real return
+		// replace this line later with real return
 	}
 
 	public static Set<String> makeDictionary() {

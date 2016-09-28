@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Node<String> {
 
-	private ArrayList<Node<String>> children = new ArrayList<Node<String>>();
+	//private ArrayList<Node<String>> children = new ArrayList<Node<String>>();
 	private Node<String> parent = null;
 	private String word = null;
 	
@@ -18,25 +18,24 @@ public class Node<String> {
 	}
 	
 	
-	public ArrayList<Node<String>> getChildren(){
-		return children;
-	}
+	//public ArrayList<Node<String>> getChildren(){
+	//	return children;
+	//}
 	
-	public void setParent(Node<String> parent){
-		parent.addChild(this);
+	public void setParent(Node<String> parent){		
 		this.parent = parent;
 	}
 	
-	public void addChild(String word, Node<String> parent){
-		Node<String> child = new Node<String>(word);
-		child.setParent(parent);
-		this.children.add(child);
-	}
+	//public void addChild(String word){
+	//	Node<String> child = new Node<String>(word);
+	//	child.setParent(this);
+	//	this.children.add(child);
+	//}
 	
-	public void addChild(Node<String> child) {
+	//public void addChild(Node<String> child) {
         //child.setParent(this);
-        this.children.add(child);
-    }
+      //  this.children.add(child);
+    //}
 	
 	public String getWord(){
 		return this.word;
