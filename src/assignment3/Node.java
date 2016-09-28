@@ -1,5 +1,6 @@
 package assignment3;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 
 public class Node<String> {
@@ -51,4 +52,18 @@ public class Node<String> {
 	
 	
 	
+=======
+public class Node {
+	String word = "";
+	boolean marked; 
+	Node parent;
+
+ Node(String start, Node parent) {
+	this.word = start;
+	this.marked = false;
+	this.parent = parent;
+}
+
+
+>>>>>>> origin/master
 }

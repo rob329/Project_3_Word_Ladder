@@ -16,9 +16,17 @@ package assignment3;
 
 import java.util.*;
 import java.io.*;
+import java.util.ArrayList;  
+import java.util.LinkedList;  
+import java.util.Queue; 
 
 public class Main {
+<<<<<<< HEAD
 
+=======
+	public static final String[] alphabet = {"A","B","C","D","E","F", "G", "H", "I", "J", "K",
+		"L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z" }; 
+>>>>>>> origin/master
 	// static variables and constants only here.
 	public static final String[] alphabet = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O",
 			"P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
@@ -39,7 +47,11 @@ public class Main {
 			ps = System.out; // default to Stdout
 		}
 		initialize();
+<<<<<<< HEAD
 
+=======
+		getWordLadderBFS("START","END");
+>>>>>>> origin/master
 		// TODO methods to read in words, output ladder
 
 		getWordLadderBFS("stone", "sad");
@@ -73,6 +85,7 @@ public class Main {
 
 		return null; // replace this line later with real return
 	}
+<<<<<<< HEAD
 
 	public static ArrayList<String> getWordLadderBFS(String start, String end) {
 		start = start.toUpperCase();
@@ -102,14 +115,45 @@ public class Main {
 		if (dict.contains("AGONY")) {
 			System.out.println("agony");
 
+=======
+	
+    public static ArrayList<String> getWordLadderBFS(String start, String end) { 	
+    	Set<String> dict = makeDictionary();
+    	Queue<Node> queue = new LinkedList<Node>();
+    	Node startNode = new Node(start, null);
+    	queue.add(startNode);
+    	//while(!queue.isEmpty()){
+    		for(int i=0 ; i < start.length() ;i++){
+    			for(int j =0; j < alphabet.length ; j++){
+    				String Add = start.substring(0,i) + alphabet[j] + start.substring(i+1, start.length());
+    				Node newNode = new Node(Add, startNode);
+    				if(dict.contains(Add) && !(queue.contains(newNode)) ){
+    					System.out.println(Add);
+      					queue.add(newNode);
+    			}
+    			
+    		}
+    	
+    	}
+    	//}
+		// TODO some code
+		
+		if(dict.contains("ABAYA")){
+			System.out.println("Yes");
+>>>>>>> origin/master
 		}
 
 		// TODO more code
 
 		return null; // replace this line later with real return
 	}
+<<<<<<< HEAD
 
 	public static Set<String> makeDictionary() {
+=======
+   
+	public static Set<String>  makeDictionary () {
+>>>>>>> origin/master
 		Set<String> words = new HashSet<String>();
 		Scanner infile = null;
 		try {
