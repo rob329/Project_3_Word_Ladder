@@ -13,6 +13,7 @@ public class LadderTest {
 	public void test() {
 		Main test = new Main();
 		ArrayList<String> result = test.getWordLadderBFS("smart" , "money");
+		assertFalse(result == null || result.size() == 0);
 		assertEquals(result.size() , 11);
 	}
 	@Test
@@ -35,5 +36,12 @@ public class LadderTest {
 		Main.printLadder(res);
 		assertFalse(res == null || res.size() == 0);
 		assertTrue(res.size() < 3);
+		}
+	@Test
+	public void testShortest() {
+		ArrayList<String> res = Main.getWordLadderBFS("stone", "money");
+		ArrayList<String> reso = Main.getWordLadderBFS("money", "stone");
+		assertFalse(res == null || res.size() == 0);
+		assertTrue(res.size() == reso.size());
 		}
 }
