@@ -28,7 +28,7 @@ public class Main {
 			}
 			initialize();
 
-			// TODO methods to read in words, output ladder
+			parse(kb);
 
 			printLadder(getWordLadderBFS("stone", "atone" ));
 		}
@@ -50,7 +50,10 @@ public class Main {
 	 *         command is /quit, return empty ArrayList.
 	 */
 	public static ArrayList<String> parse(Scanner keyboard) {
-		// TO DO
+		String word = keyboard.nextLine();
+		ArrayList<String> inputs = new ArrayList<String>();
+		System.out.println(word);
+		if (word.equals("/quit")){return null;}
 		return null;
 	}
 
