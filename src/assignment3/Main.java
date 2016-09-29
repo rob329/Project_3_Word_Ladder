@@ -22,11 +22,14 @@ public class Main {
 	// static variables and constants only here.
 	public static ArrayList<String> going;
 	public static ArrayList<String> dfs_ladder;
+	public static ArrayList<String> dfs_searched;
 	public static final String[] alphabet = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O",
 			"P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
 	public static final int word_length = 5;
 	public static int dfs_length_pointer = 0;
 	public static int dfs_alphabet_pointer = -1;
+	public static int dfs_count = 0;
+	public static int lol = 55;
 
 	public static void main(String[] args) throws Exception {
 
@@ -44,11 +47,11 @@ public class Main {
 		}
 		initialize();
 		//going = parse(kb);
-		//getWordLadderBFS(going.get(0), going.get(1));
+		//printLadder(getWordLadderBFS(going.get(0), going.get(1)));
 
 		// TODO methods to read in words, output ladder
 		getWordLadderDFS("stone", "money");
-		// printLadder(getWordLadderBFS("tores", "zibet"));
+		//printLadder(getWordLadderBFS("zibet", "stomp"));
 	}
 
 	public static void initialize() {
@@ -57,6 +60,7 @@ public class Main {
 		// only once at the start of main.
 		going = new ArrayList<String>();
 		dfs_ladder = new ArrayList<String>();
+		dfs_searched = new ArrayList<String>();
 	}
 
 	/**
@@ -90,9 +94,12 @@ public class Main {
 		start = start.toUpperCase();
 		end = end.toUpperCase();
 		
-
-		if (dict.contains(start))
+		if (dict.contains(start)&& (!(dfs_searched.contains(start)))){
 			dfs_ladder.add(start);
+			dfs_count++;
+		}
+		
+		dfs_searched.add(start);
 		
 		// TODO more code
 		dfs_alphabet_pointer++;
@@ -101,11 +108,24 @@ public class Main {
 			dfs_length_pointer++;
 			dfs_alphabet_pointer = 0;
 		}
-	
-		if (start.equals(end) || dfs_length_pointer == word_length)
+		if(dfs_length_pointer == word_length)
+		{
+			dfs_length_pointer = 0;
+			dfs_alphabet_pointer = 0;
+			dfs_count--;
+					
+		}
+		lol--;
+		if(lol == 0)
+			lol = 1000;
+		if (start.equals(end)|| dfs_count == 0){
+			dfs_ladder.add(start);
+			System.out.println("- yay!!");
 			return dfs_ladder;
-		return getWordLadderDFS(start.substring(0, dfs_length_pointer)
-         + alphabet[dfs_alphabet_pointer].charAt(0) + start.substring(dfs_length_pointer + 1), end);
+		}
+		
+		return getWordLadderDFS(dfs_ladder.get(dfs_count - 1).substring(0, dfs_length_pointer)
+         + alphabet[dfs_alphabet_pointer].charAt(0) + dfs_ladder.get(dfs_count - 1).substring(dfs_length_pointer + 1), end);
 	}
 
 	public static ArrayList<String> getWordLadderBFS(String start, String end) {
@@ -184,7 +204,7 @@ public class Main {
 			ladder.add(start);
 
 		}
-		printLadder(ladder);
+		//printLadder(ladder);
 		return ladder;
 
 		// TODO more code
