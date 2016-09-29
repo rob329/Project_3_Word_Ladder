@@ -8,7 +8,11 @@ import java.io.*;
 
 public class Main {
 
-		public static ArrayList<String> going;
+
+	public static ArrayList<String> going;
+
+	
+
 	// static variables and constants only here.
 		public static final String[] alphabet = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O",
 				"P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
@@ -31,12 +35,16 @@ public class Main {
 			initialize();
 			
 			going = parse(kb);
-			getWordLadderBFS(going.get(0), going.get(1));
-			
+			ArrayList<String> fun = new ArrayList();
+			fun = getWordLadderBFS(going.get(0), going.get(1));
+			printLadder(fun);
 			
 		}
 
 		
+
+		// TODO methods to read in words, output ladder
+
 
 
 	public static void initialize() {
@@ -74,6 +82,7 @@ public class Main {
 
 		return null; // replace this line later with real return
 	}
+
 
 	public static ArrayList<String> getWordLadderBFS(String start, String end) {
 
@@ -142,13 +151,14 @@ public class Main {
 
 			}
 			if (queue.size() == 0) {
-				System.out.println("no word ladder could not be found between " + start.toLowerCase() + " and " + end.toLowerCase());
-				return ladder;
+				return null;
 			}
 			if (!(queue.get(queue.size() - 1).getWord().equals(end))) {
-				System.out.println("no word ladder could not be found between " + start.toLowerCase() + " and " + end.toLowerCase());
-				return ladder;
+				return null;
 			}
+
+		
+
 
 			Node end_node = queue.get(queue.size() - 1).getParent();
 			ladder.add(end);
@@ -158,14 +168,23 @@ public class Main {
 				end_node = end_node.getParent();
 			}
 			ladder.add(start);
-
-
+			ArrayList<String> done = new ArrayList<String>();
+			int length = ladder.size();
+			int L = 0;
+			int F = length - 1;
+			while(L < length){
+				done.add(ladder.get(F));
+				L++;
+				F--;
+			}
+			return done;
 
 		}
-		printLadder(ladder);
+		
 		return ladder;
 
 	}
+
 		public static Set<String> makeDictionary() {
 			Set<String> words = new HashSet<String>();
 			Scanner infile = null;
@@ -181,19 +200,29 @@ public class Main {
 			}
 			return words;
 		}
+
+
+
+   
+	
 		
 		public static void printLadder(ArrayList<String> ladder) {
-			if(ladder.size() == 2){
+			if (ladder == null){
+				System.out.println("no word ladder could not be found between " + going.get(0) + " and " + going.get(1));
+			}
+			else if(ladder.size() == 2){
 				String first = ladder.get(0).toLowerCase();
 				String last = ladder.get((ladder.size() - 1)).toLowerCase();
 				System.out.println("A "+ 0 +"-rung word ladder exists between " + first + " and " + last + ".\n" + first + "\n" + last );
 				return;
 			}
+			else{
 			String first = ladder.get(0).toLowerCase();
 			String last = ladder.get((ladder.size() - 1)).toLowerCase();
 			System.out.println("A "+ (ladder.size() - 2) +"-rung word ladder exists between " + first + " and " + last + "." );
-			for (int i = ladder.size() - 1; i >= 0; i--) {
+			for (int i = 0; i < ladder.size(); i++) {
 				System.out.println(ladder.get(i).toLowerCase());
+			}
 			}
 		}
 		// TODO
