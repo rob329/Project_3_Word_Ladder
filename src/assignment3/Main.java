@@ -1,12 +1,14 @@
 package assignment3;
 
 import java.util.*;
+
+
 import java.io.*;
 
 
 public class Main {
 
-	
+		public static ArrayList<String> going;
 	// static variables and constants only here.
 		public static final String[] alphabet = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O",
 				"P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
@@ -27,16 +29,18 @@ public class Main {
 				ps = System.out; // default to Stdout
 			}
 			initialize();
-
-			parse(kb);
-
-			printLadder(getWordLadderBFS("stone", "atone" ));
+			
+			going = parse(kb);
+			getWordLadderBFS(going.get(0), going.get(1));
+			
+			
 		}
 
 		
 
 
 	public static void initialize() {
+		going = new ArrayList<String>();
 		// initialize your static variables or constants here.
 		// We will call this method before running our JUNIT tests. So call it
 		// only once at the start of main.
@@ -50,11 +54,14 @@ public class Main {
 	 *         command is /quit, return empty ArrayList.
 	 */
 	public static ArrayList<String> parse(Scanner keyboard) {
-		String word = keyboard.nextLine();
+		String word = keyboard.next();
+		if (word.equals("/quit")){System.exit(0);}
+		String word2 = keyboard.next();
+		if (word2.equals("/quit")){System.exit(0);}
 		ArrayList<String> inputs = new ArrayList<String>();
-		System.out.println(word);
-		if (word.equals("/quit")){return null;}
-		return null;
+		inputs.add(word);
+		inputs.add(word2);
+		return inputs;
 	}
 
 	public static ArrayList<String> getWordLadderDFS(String start, String end) {
@@ -135,13 +142,11 @@ public class Main {
 
 			}
 			if (queue.size() == 0) {
-				System.out.println("srry, ladder could not be found");
-				System.out.println(queue.size());
+				System.out.println("no word ladder could not be found between " + start.toLowerCase() + " and " + end.toLowerCase());
 				return ladder;
 			}
 			if (!(queue.get(queue.size() - 1).getWord().equals(end))) {
-				System.out.println("srry, ladder could not be found");
-				System.out.println(queue.size());
+				System.out.println("no word ladder could not be found between " + start.toLowerCase() + " and " + end.toLowerCase());
 				return ladder;
 			}
 
@@ -157,7 +162,7 @@ public class Main {
 
 
 		}
-
+		printLadder(ladder);
 		return ladder;
 
 	}
