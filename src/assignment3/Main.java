@@ -6,6 +6,7 @@ import java.util.*;
 
 
 import java.io.*;
+<<<<<<< HEAD
 
 
 public class Main {
@@ -48,13 +49,50 @@ public class Main {
 		// TODO methods to read in words, output ladder
 
 
+=======
+
+public class Main {
+
+	// static variables and constants only here.
+	public static ArrayList<String> going;
+	public static ArrayList<String> dfs_ladder;
+	public static final String[] alphabet = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O",
+			"P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
+	public static final int word_length = 5;
+	public static int dfs_length_pointer = 0;
+	public static int dfs_alphabet_pointer = -1;
+
+	public static void main(String[] args) throws Exception {
+
+		Scanner kb; // input Scanner for commands
+		PrintStream ps; // output file
+		// If arguments are specified, read/write from/to files instead of Std
+		// IO.
+		if (args.length != 0) {
+			kb = new Scanner(new File(args[0]));
+			ps = new PrintStream(new File(args[1]));
+			System.setOut(ps); // redirect output to ps
+		} else {
+			kb = new Scanner(System.in);// default from Stdin
+			ps = System.out; // default to Stdout
+		}
+		initialize();
+		//going = parse(kb);
+		//getWordLadderBFS(going.get(0), going.get(1));
+
+		// TODO methods to read in words, output ladder
+		getWordLadderDFS("stone", "money");
+		// printLadder(getWordLadderBFS("tores", "zibet"));
+	}
+>>>>>>> master
 
 	public static void initialize() {
 		going = new ArrayList<String>();
 		// initialize your static variables or constants here.
 		// We will call this method before running our JUNIT tests. So call it
 		// only once at the start of main.
-
+		going = new ArrayList<String>();
+		dfs_ladder = new ArrayList<String>();
 	}
 
 	/**
@@ -64,10 +102,22 @@ public class Main {
 	 *         command is /quit, return empty ArrayList.
 	 */
 	public static ArrayList<String> parse(Scanner keyboard) {
+<<<<<<< HEAD
 		String word = keyboard.next();
 		if (word.equals("/quit")){System.exit(0);}
 		String word2 = keyboard.next();
 		if (word2.equals("/quit")){System.exit(0);}
+=======
+		// TO DO
+		String word = keyboard.next();
+		if (word.equals("/quit")) {
+			System.exit(0);
+		}
+		String word2 = keyboard.next();
+		if (word2.equals("/quit")) {
+			System.exit(0);
+		}
+>>>>>>> master
 		ArrayList<String> inputs = new ArrayList<String>();
 		inputs.add(word);
 		inputs.add(word2);
@@ -80,17 +130,37 @@ public class Main {
 		// Return empty list if no ladder.
 		// TODO some code
 		Set<String> dict = makeDictionary();
+		start = start.toUpperCase();
+		end = end.toUpperCase();
+		
+
+		if (dict.contains(start))
+			dfs_ladder.add(start);
+		
 		// TODO more code
-
-		return null; // replace this line later with real return
+		dfs_alphabet_pointer++;
+		if(dfs_alphabet_pointer == alphabet.length)
+		{
+			dfs_length_pointer++;
+			dfs_alphabet_pointer = 0;
+		}
+	
+		if (start.equals(end) || dfs_length_pointer == word_length)
+			return dfs_ladder;
+		return getWordLadderDFS(start.substring(0, dfs_length_pointer)
+         + alphabet[dfs_alphabet_pointer].charAt(0) + start.substring(dfs_length_pointer + 1), end);
 	}
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 
 	public static ArrayList<String> getWordLadderBFS(String start, String end) {
 
 		// TODO some code
 		start = start.toUpperCase();
 		end = end.toUpperCase();
+<<<<<<< HEAD
 		Node parent = new Node(start, null);
 		Set<String> dict = makeDictionary();
 
@@ -110,10 +180,27 @@ public class Main {
 
 				check = head.substring(0, i) + alphabet[j].charAt(0) + head.substring(i + 1);
 				if (check.equals(end)){
+=======
+		Node<String> parent = new Node<String>(start, null);
+		Set<String> dict = makeDictionary();
+
+		ArrayList<String> ladder = new ArrayList<String>();
+		ArrayList<Node<String>> queue = new ArrayList<Node<String>>();
+
+		String check = "";
+		boolean finish = false;
+
+		for (int i = 0; i < word_length; i++)
+			for (int j = 0; j < alphabet.length; j++) {
+
+				check = start.substring(0, i) + alphabet[j].charAt(0) + start.substring(i + 1);
+				if (check.equals(end)) {
+>>>>>>> master
 					finish = true;
 					ladder.add(start);
 					ladder.add(end);
 					return ladder;
+<<<<<<< HEAD
 					}
 				if (dict.contains(check) && (!(check.equals(start)))) {
 					dict.remove(check);
@@ -124,20 +211,38 @@ public class Main {
 				}
 			}
 	}
+=======
+				}
+
+				if (dict.contains(check) && (!(check.equals(start)))) {
+					dict.remove(check);
+					Node<String> addition = new Node<String>(check, parent);
+					queue.add(addition);
+				}
+			}
+
+>>>>>>> master
 		while (!finish) {
 
 			for (int k = 0; k < queue.size(); k++) {
 
 				for (int i = 0; i < word_length; i++)
 					for (int j = 0; j < alphabet.length; j++) {
+<<<<<<< HEAD
 						Node nd = queue.get(k);
 						check = ((String) nd.getWord()).substring(0, i) + alphabet[j].charAt(0)
 								+ ((String) nd.getWord()).substring(i + 1);
+=======
+						Node<String> nd = queue.get(k);
+						check = (nd.getWord()).substring(0, i) + alphabet[j].charAt(0)
+								+ (nd.getWord()).substring(i + 1);
+>>>>>>> master
 						if (check.equals(end)) {
 							finish = true;
 							k = queue.size() + 1;
 							i = word_length + 1;
 							j = alphabet.length + 1;
+<<<<<<< HEAD
 							// System.out.println(check);
 
 						}
@@ -148,11 +253,21 @@ public class Main {
 							queue.add(addition);
 							// System.out.println(check);
 
+=======
+							
+						}
+
+						if (dict.contains(check) && (!(check.equals(nd.getWord())))) {
+							dict.remove(check);
+							Node<String> addition = new Node<String>(check, nd);
+							queue.add(addition);							
+>>>>>>> master
 						}
 					}
 
 			}
 			if (queue.size() == 0) {
+<<<<<<< HEAD
 				return null;
 			}
 			if (!(queue.get(queue.size() - 1).getWord().equals(end))) {
@@ -201,9 +316,31 @@ public class Main {
 				words.add(infile.next().toUpperCase());
 			}
 			return words;
+=======
+				System.out.println("no word ladder could not be found between " + start.toLowerCase() + " and " + end.toLowerCase());
+				return ladder;
+			}
+			if (!(queue.get(queue.size() - 1).getWord().equals(end))) {
+				System.out.println("no word ladder could not be found between " + start.toLowerCase() + " and " + end.toLowerCase());
+				return ladder;
+			}
+
+
+			Node<String> end_node = queue.get(queue.size() - 1).getParent();
+			ladder.add(end);
+			while (!(start.equals(end_node.getWord()))) {
+				ladder.add(end_node.getWord());				
+				end_node = end_node.getParent();
+			}
+			ladder.add(start);
+
+>>>>>>> master
 		}
+		printLadder(ladder);
+		return ladder;
 
 
+<<<<<<< HEAD
 
    
 	
@@ -230,4 +367,38 @@ public class Main {
 		// TODO
 		// Other private static methods here
 
+=======
+		// replace this line later with real return
+	}
+
+	public static Set<String> makeDictionary() {
+		Set<String> words = new HashSet<String>();
+		Scanner infile = null;
+		try {
+			infile = new Scanner(new File("five_letter_words.txt"));
+		} catch (FileNotFoundException e) {
+			System.out.println("Dictionary File not Found!");
+			e.printStackTrace();
+			System.exit(1);
+		}
+		while (infile.hasNext()) {
+			words.add(infile.next().toUpperCase());
+		}
+		return words;
+	}
+
+	public static void printLadder(ArrayList<String> ladder) {
+		if(ladder.size() == 2){
+			String first = ladder.get(0).toLowerCase();
+			String last = ladder.get((ladder.size() - 1)).toLowerCase();
+			System.out.println("A "+ 0 +"-rung word ladder exists between " + first + " and " + last + ".\n" + first + "\n" + last );
+			return;
+		}
+		String first = ladder.get(0).toLowerCase();
+		String last = ladder.get((ladder.size() - 1)).toLowerCase();
+		System.out.println("A "+ (ladder.size() - 2) +"-rung word ladder exists between " + first + " and " + last + "." );
+		for (int i = ladder.size() - 1; i >= 0; i--) {
+			System.out.println(ladder.get(i).toLowerCase());
+		}
+>>>>>>> master
 	}

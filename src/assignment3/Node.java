@@ -1,6 +1,10 @@
 package assignment3;
 
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+>>>>>>> master
 import java.util.ArrayList;
 
 public class Node<String> {
@@ -53,8 +57,22 @@ public class Node<String> {
 	
 	
 	
+<<<<<<< HEAD
+=======
+	
+=======
+public class Node {
+	String word = "";
+	boolean marked; 
+	Node parent;
+>>>>>>> master
 
 
 }
 
 
+<<<<<<< HEAD
+=======
+>>>>>>> origin/master
+}
+>>>>>>> master
