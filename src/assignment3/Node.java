@@ -1,69 +1,82 @@
+/* WORD LADDER Main.java
+ * EE422C Project 3 submission by
+ * Replace <...> with your actual data.
+ * <Robert Bolt>
+ * <rob329>
+ * <16465>
+ * <Devisriram Akhil Mujje>
+ * <dam4335>
+ * <16470>
+ * Slip days used: <0>
+ * Git URL: https://github.com/rob329/Project_3_Word_Ladder.git
+ * Fall 2016
+ */
 package assignment3;
-
-<<<<<<< HEAD
-import java.util.ArrayList;
 
 public class Node<String> {
 
-	private ArrayList<Node<String>> children = new ArrayList<Node<String>>();
 	private Node<String> parent = null;
 	private String word = null;
-	
-	public Node(String word){
+
+	/**
+	 * Node(String word) Creates a Node object and assigns the given word
+	 * 
+	 * @param word
+	 *            word that Node holds for Word Ladder
+	 */
+	public Node(String word) {
 		this.word = word;
 	}
 
-	public Node(String word, Node<String> parent){
+	/**
+	 * Node(String word, Node<String> parent)
+	 * Creates a Node object and assigns
+	 * the given word and parent to it
+	 * 
+	 * @param word
+	 *            word that Node holds for Word Ladder
+	 * @param parent
+	 *            parent of the newly created Node
+	 */
+	public Node(String word, Node<String> parent) {
 		this.word = word;
 		this.parent = parent;
 	}
-	
-	
-	public ArrayList<Node<String>> getChildren(){
-		return children;
+
+	/**
+	 * getParent()
+	 * Returns the parent of this node
+	 * @return parent of this node
+	 */
+	public Node<String> getParent() {
+		return this.parent;
 	}
-	
-	public void setParent(Node<String> parent){
-		parent.addChild(this);
+
+	/**
+	 * setParent(Node<String> parent)
+	 * Sets the parent of this child Node	 * 
+	 * @param parent parent of this Node
+	 */
+	public void setParent(Node<String> parent) {
 		this.parent = parent;
 	}
-	
-	public void addChild(String word, Node<String> parent){
-		Node<String> child = new Node<String>(word);
-		child.setParent(parent);
-		this.children.add(child);
-	}
-	
-	public void addChild(Node<String> child) {
-        //child.setParent(this);
-        this.children.add(child);
-    }
-	
-	public String getWord(){
+
+	/**
+	 * getWord()
+	 * Returns the word that this Node holds
+	 * @return the word that this Node holds
+	 */
+	public String getWord() {
 		return this.word;
 	}
-	
-	public void setWord(String word){
+
+	/**
+	 * setWord(String word)
+	 * Sets the word for this Node
+	 * @param word value that Node will hold
+	 */
+	public void setWord(String word) {
 		this.word = word;
 	}
-	
-	
-	
-	
-	
-	
-=======
-public class Node {
-	String word = "";
-	boolean marked; 
-	Node parent;
 
- Node(String start, Node parent) {
-	this.word = start;
-	this.marked = false;
-	this.parent = parent;
-}
-
-
->>>>>>> origin/master
 }
